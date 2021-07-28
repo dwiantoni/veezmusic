@@ -13,7 +13,7 @@ async def inline(client: Client, query: InlineQuery):
         await client.answer_inline_query(
             query.id,
             results=answers,
-            switch_pm_text="Ketikan nama Lagu/video di YouTube...",
+            switch_pm_text="type a youtube video name...",
             switch_pm_parameter="help",
             cache_time=0
         )
@@ -46,6 +46,6 @@ async def inline(client: Client, query: InlineQuery):
             await query.answer(
                 results=answers,
                 cache_time=0,
-                switch_pm_text="Error: Search timed out",
+                switch_pm_text="error: search timed out",
                 switch_pm_parameter="",
             )
