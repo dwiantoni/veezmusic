@@ -32,7 +32,7 @@ async def _human_time_duration(seconds):
 @Client.on_message(command("start") & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>✨ Welcome {message.from_user.first_name} \n\n
+        f"""<b>✨ Welcome {message.from_user.first_name} \n
 💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) allow you to play music on groups through the new Telegram's voice chats!
 
 💡 Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!
