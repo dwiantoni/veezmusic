@@ -298,20 +298,22 @@ async def deezsong(_, message):
     is_downloading = False
 
 
-@Client.on_message(command(["video", f"video@{BOT_USERNAME}"])
+@Client.on_message(filters.command(["vsong", "video"]))
 async def ytmusic(client, message: Message):
     global is_downloading
     if is_downloading:
         await message.reply_text(
-            "**try again later.**"
+            "another download is in progress, try again after sometime."
         )
         return
+
     urlissed = get_text(message)
+
     pablo = await client.send_message(
-        message.chat.id, f"**getting** `{urlissed}` **from youtube, wait...**"
+        message.chat.id, f"`getting {urlissed} from youtube servers, please wait...`"
     )
     if not urlissed:
-        await pablo.edit("**syntax invalid** check `/help` for information!")
+        await pablo.edit("invalid syntax command, check /help for information!")
         return
 
     search = SearchVideos(f"{urlissed}", offset=1, mode="dict", max_results=1)
@@ -345,7 +347,7 @@ async def ytmusic(client, message: Message):
 
             if duration > DURATION_LIMIT:
                 await pablo.edit(
-                    f"❌ **Video berdurasi lebih dari {DURATION_LIMIT} menit tidak diperbolehkan, video yang ingin kamu download {duration} menit**"
+                    f"❌ Videos longer than {DURATION_LIMIT} minute(s) aren't allowed, the provided video is {duration} minute(s)"
                 )
                 is_downloading = False
                 return
