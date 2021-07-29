@@ -32,12 +32,12 @@ async def _human_time_duration(seconds):
 @Client.on_message(command("start") & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>✨ Welcome {message.from_user.first_name} \n
-💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) allow you to play music on groups through the new Telegram's voice chats!
+        f"""<b>✨ **Welcome {message.from_user.first_name}** \n
+💭 **[{BOT_NAME}](https://t.me/{BOT_USERNAME}) allow you to play music on groups through the new Telegram's voice chats!**
 
-💡 Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!
+💡 **Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!**
 
-❓ For information about all feature of this bot, just type /help
+❓ **For information about all feature of this bot, just type /help**
 </b>""",
         reply_markup=InlineKeyboardMarkup(
             [ 
@@ -73,7 +73,7 @@ async def start(client: Client, message: Message):
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
     await message.reply_text(
-        f"""✅ bot is running\n<b>💠 uptime:</b> `{uptime}`""",
+        f"""✅ **bot is running**\n<b>💠 **uptime:**</b> `{uptime}`""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -130,7 +130,7 @@ async def ping_pong(client: Client, m: Message):
     m_reply = await m.reply_text("pinging...")
     delta_ping = time() - start
     await m_reply.edit_text(
-        f"{emoji.PING_PONG} **🏓 PONG!!**\n\n"
+        f"{emoji.PING_PONG} **PONG!!**\n\n"
         f"`{delta_ping * 1000:.3f} ms`"
     )
 
