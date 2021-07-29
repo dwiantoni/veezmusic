@@ -482,7 +482,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo = "final.png", 
         caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Antrian ke {position}`\n" \
-                + f"🎧 **Permintaan** {message.from_user.mention}",
+                + f"🔮 **Permintaan** {message.from_user.mention}",
         reply_markup = keyboard
         )
         os.remove("final.png")
@@ -500,7 +500,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo = "final.png",
         caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Sedang Memutar`\n" \
-                + f"🎧 **Permintaan:** {message.from_user.mention}",
+                + f"🔮 **Permintaan:** {message.from_user.mention}",
         reply_markup = keyboard
         )
         os.remove("final.png")
