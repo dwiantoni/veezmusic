@@ -21,10 +21,10 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 async def ytsearch(_, message: Message):
     try:
         if len(message.command) < 2:
-            await message.reply_text("**/search masukan judul video!**")
+            await message.reply_text("**/search give video name!**")
             return
         query = message.text.split(None, 1)[1]
-        m = await message.reply_text("🔎 **Sedang Mencari Video**")
+        m = await message.reply_text("🔎 **searching video**")
         results = YoutubeSearch(query, max_results=4).to_dict()
         i = 0
         text = ""
