@@ -38,7 +38,7 @@
 - `/reload` - Refresh admin list
 
 ## Deployment 💜
-the easy way to host this bot, deploy to heroku.
+the easy way to host this bot, deploy to heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/levina-lab/veezmusic)
 
