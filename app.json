@@ -1,9 +1,9 @@
 {
-    "name": "TDMusicBot",
+    "name": "Veez Music Bot",
     "logo": "https://telegra.ph/file/7ffa8d18b9b7f1b51a81e.jpg",
-    "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
-    "keywords": ["bot music telegram", "bot musik", "cara membuat bot musik di telegram"],
-    "repository": "https://github.com/tofikdn/TDMusicBot",
+    "description": "bot untuk memutar musik di obrolan suara telegram.",
+    "keywords": ["music", "voice chat", "telegram"],
+    "repository": "https://github.com/levina-lab/veezmusic",
     "stack": "container",
     "env": {
         "SESSION_NAME": {
