@@ -1,24 +1,21 @@
-# How To Host
-The easiest way to deploy this Bot
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/tofikdn/TDMusicBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-red?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<h2 align="centre">🎶 Veez Music Bot</h2>
 
-Get STRING_NAME from here:
+### Bot musik yang dapat memutar musik di voice chat group anda.
 
-[![GenerateString](https://img.shields.io/badge/repl.it-generateString-yellowgreen)](https://replit.com/@tofikdn/stringsession#main.py)
+<p align="center">
+  <img src="https://telegra.ph/file/8bf3d62837cb59c3f8e7f.png">
+</p>
 
-### Mandatory Vars.
+<h3>Requirements 📝</h3>
 
-- Some Of The Mandatory Vars Are :-
-   - `API_ID` :  Give API_ID of your Alternate Telegram Account. also get from here https://my.telegram.org
-   - `API_HASH` :  Give API_HASH of your Alternate Telegram Account. also get from here https://my.telegram.org
-   - `STRING_NAME` :  Make a string session from [here](https://replit.com/@tofikdn/stringsession)
-   - `BOT_TOKEN` :  Make a Bot from [@Botfather](https://t.me/botfather) and fill it's bot token.
-   - `SUDO_USERS` :  Fill Userid of yhe users whom you want to be able to control the bot. You can add multiple id by giving a space in b/w each id.
+- FFmpeg
+- NodeJS [nodesource.com](https://nodesource.com/)
+- Python 3.7+
+- [PyTgCalls](https://github.com/pytgcalls/pytgcalls)
 
+🧪 Get STRING_SESSION from here:
 
-
-
-
+[![GenerateString](https://img.shields.io/badge/repl.it-generateString-yellowgreen)](https://replit.com/@levinalab/StringSession#main.py)
 
 
 ## Commands 🛠
@@ -28,7 +25,7 @@ Get STRING_NAME from here:
 - `/current` - Show now playing
 - `/song <song name>` - download songs you want quickly
 - `/search <query>` - search videos on youtube with details
-- `/video <song name>` - download videos you want quickly
+- `/vsong <song name>` - download videos you want quickly
 
 #### Admins only.
 - `/player` - open music player settings panel
@@ -40,41 +37,14 @@ Get STRING_NAME from here:
 - `/userbotleave` - remove assistant from your chat
 - `/reload` - Refresh admin list
 
-## Requirements
+## Deployment 💜
+the easy way to host this bot, deploy to heroku.
 
-- FFmpeg
-- Python 3.7+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/levina-lab/veezmusic)
 
-## Deployment
-
-### Config
-
-Copy `example.env` to `.env` and fill it with your credentials.
-
-### The good way
-
-1. Install Python requirements:
-   ```bash
-   pip install -U -r requirements.txt
-   ```
-2. Run:
-   ```bash
-   python main.py
-   ```
-
-### Docker
-
-1. Build:
-   ```bash
-   docker build -t musicplayer .
-   ```
-2. Run:
-   ```bash
-   docker run --env-file .env musicplayer
-   ```
-
-## License
-
-### GNU Affero General Public License v3.0
-
-[Read more](http://www.gnu.org/licenses/#AGPL)
+### Credits 💖
+- [Levina](https://github.com/levina-lab): Dev
+- [Laky](https://github.com/Laky-64) & [Andrew](https://github.com/AndrewLaneX): PyTgCalls
+- [Original Repo](https://github.com/suprojects/CallsMusic)
+- [Veez Music Bot](https://t.me/veezmusicbot) Our Music Bot
+- [RojSerBest](https://github.com/rojserbest) CallsMusic Developer
