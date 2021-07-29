@@ -92,15 +92,16 @@ async def start(client: Client, message: Message):
 @Client.on_message(command("help") & filters.private & ~filters.edited)
 async def help(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>Hi {message.from_user.first_name}!
-\n/play (song name) - To play the song you requested from youtube
+        f"""<b>Hello {message.from_user.first_name}✨
+\n👥 **command for all users:**
+\n/play (song name) - To play the song you requested from youtube
 /playlist - To show the list of all music for streaming
 /current - To show the song in streaming
 /song (song name) - To download song from youtube
 /search (video name) - To search video from youtube detailed
-/video (video name) - To download video from youtube detailed
-\n**Admins Only:**
-/player - Open music player settings panel
+/vsong (video name) - To download video from youtube detailed
+\n👷🏻‍♂️ **command for admins:**
+\n/player - Open music player settings panel
 /pause - Pause the music streaming
 /resume - Resume the music was paused
 /skip - For skip to the next song
