@@ -17,7 +17,7 @@ async def addchannel(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>Tambahkan saya sebagai admin group Anda terlebih dahulu.</b>",
+            "<b>make me as admin first, you can't use me if im not admin.</b>",
         )
         return
     try:
@@ -26,20 +26,20 @@ async def addchannel(client, message):
         user.first_name = "helper"
     try:
         await USER.join_chat(invitelink)
-        await USER.send_message(message.chat.id, "Saya bergabung di sini seperti yang Anda minta")
+        await USER.send_message(message.chat.id, "i'm joined here to play music.")
     except UserAlreadyParticipant:
         await message.reply_text(
-            f"<b>{user.first_name} sudah ada di obrolan Anda.</b>",
+            f"<b>{user.first_name} already in your chat.</b>",
         )
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>🛑 Flood Wait Error 🛑 \n{user.first_name} tidak dapat bergabung dengan group Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam group."
-            f"\n\nAtau tambahkan @{user.username} secara manual ke Group Anda dan coba lagi.</b>",
+            f"<b>🛑 Flood Wait Error 🛑 \n{user.first_name} can't join to this group, maybe my assistant has been banned from this group."
+            f"\n\nor add @{user.username} manually to your group.</b>",
         )
         return
     await message.reply_text(
-        f"<b>{user.first_name} berhasil bergabung dengan group Anda.</b>",
+        f"<b>{user.first_name} successfully joined to your group.</b>",
     )
 
     
@@ -49,8 +49,8 @@ async def rem(USER, message):
         await USER.leave_chat(message.chat.id)
     except:  
         await message.reply_text(
-            f"<b>Pengguna tidak dapat meninggalkan group Anda! Mungkin menunggu floodwaits."
-            "\n\nAtau keluarkan saya secara manual dari ke Group Anda</b>",
+            f"<b>assistant can't leave from group because waiting for floodwaits."
+            "\n\nor kick the assistant manually.</b>",
         )
         return
 
@@ -60,7 +60,7 @@ async def bye(client, message):
     if message.from_user.id in SUDO_USERS:
         left=0
         failed=0
-        lol = await message.reply("Assistant Leaving all chats")
+        lol = await message.reply("assistant leaving all chats")
         async for dialog in USER.iter_dialogs():
             try:
                 await USER.leave_chat(dialog.chat.id)
