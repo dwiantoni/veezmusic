@@ -7,42 +7,64 @@
     "stack": "container",
     "env": {
         "SESSION_NAME": {
-            "description": "Masukan String Session Pyrogram untuk assistant yang naik ke VCG",
+            "description": "isi dengan string session pyrogram",
             "required": true
         },
         "BOT_TOKEN": {
-            "description": "Masukan Bot Token dari @BotFather",
-            "required": true
-        },
-        "BOT_USERNAME": {
-            "description": "Your bot's username without @",
+            "description": "token bot anda dari @BotFather",
             "required": true
         },
         "BOT_NAME": {
-            "description": "Your MusicPlayer Bot Name.",
+            "description": "nama bot musik anda.",
             "required": false,
             "value": ""
         },
+        "BOT_USERNAME": {
+            "description": "isi dengan username bot musik kamu tanpa @",
+            "required": true,
+            "value": "veezmusicbot"
+        },
         "ASSISTANT_NAME": {
-            "description": "Your assistant username without @",
-            "required": true
+            "description": "isi dengan username assistant bot musik kamu tanpa @",
+            "required": true,
+            "value": "veezasisstant"
+        },
+        "BG_IMAGE": {
+            "description": "isi dengan link background image kalian",
+            "required": false,
+            "value": "https://telegra.ph/file/d91623e9cefcef8fb3aa8.png"
+        },
+        "OWNER_NAME": {
+            "description": "isi dengan username kamu",
+            "required": false,
+            "value": "@dlwrml"
         },
         "API_ID": {
-            "description": "Masukan APP ID Silahkan Ambil dari my.telegram.org/apps",
+            "description": "App ID dari my.telegram.org/apps",
             "required": true
         },
         "API_HASH": {
-            "description": "Masukan API HASH Silahkan Ambil dari my.telegram.org/apps",
+            "description": "App hash dari my.telegram.org/apps",
             "required": true
         },
         "SUDO_USERS": {
-            "description": "Daftar User ID pengguna dihitung sebagai admin di semua tempat (pemisah menggunakan space)",
+            "description": "list id untuk daftar anggota sudo (pisahkan dengan spasi).",
             "required": true
         },
         "DURATION_LIMIT": {
-            "description": "Batas durasi audio maksimal untuk download (minutes)",
+            "description": "max durasi untuk video yang diunduh (dalam menit).",
             "required": true,
-            "value": "60"
+            "value": "15"
+        },
+        "UPDATES_CHANNEL": {
+            "description": "isi dengan username channel kamu, jika tidak punya lewati saja",
+            "required": false,
+            "value": "levinachannel"
+        },
+        "GROUP_SUPPORT": {
+            "description": "isi dengan username grup kamu, jika tidak punya skip saja",
+            "required": false,
+            "value": "gcsupportbots"
         }
     },
     "buildpacks": [
