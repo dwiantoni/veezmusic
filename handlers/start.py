@@ -1,6 +1,6 @@
 from time import time
 from datetime import datetime
-from config import BOT_USERNAME, BOT_NAME, ASSISTANT_NAME
+from config import BOT_USERNAME, BOT_NAME, ASSISTANT_NAME, OWNER_NAME, UPDATES_CHANNEL, GROUP_SUPPORT
 from helpers.filters import command
 from pyrogram import Client, filters, emoji
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
@@ -32,27 +32,33 @@ async def _human_time_duration(seconds):
 @Client.on_message(command("start") & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>┗┓ Hi {message.from_user.first_name} My Name is [{BOT_NAME}](https://t.me/{BOT_USERNAME}) ┏┛\n
-Saya Bot Music Group, Yang dapat Memutar Lagu di Voice Chat Group Dengan cara yang Mudah
-Saya Memiliki Banyak Fitur Praktis Seperti:
-┏━━━━━━━━━━━━━━
-┣• Memutar Musik.
-┣• Mendownload Lagu.
-┣• Mencari Lagu Yang ingin di Putar atau di Download.
-┗━━━━━━━━━━━━━━
-Ketik » /help « Untuk Melihat Daftar Perintah!
+        f"""<b>✨ Welcome {message.from_user.first_name} \n\n
+💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) allow you to play music on groups through the new Telegram's voice chats!
+
+💡 Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!
+
+❓ For information about all feature of this bot, just type /help
 </b>""",
         reply_markup=InlineKeyboardMarkup(
             [ 
                 [
                     InlineKeyboardButton(
-                        "➕ Tambahkan Ke Group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
-                  ],[
+                        "➕ Add me to Group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+                ],[
                     InlineKeyboardButton(
-                         "🤖 Assistant", url=f"https://t.me/{ASSISTANT_NAME}"
+                         "📚 Commands", url="https://telegra.ph/VEEZ-MUSIC-GUIDE-07-27"
                     ),
                     InlineKeyboardButton(
-                        "🛠 Repo", url="https://github.com/tofikdn/TDMusicBot"
+                        "🎁 Donate", url=f"https://t.me/{OWNER_NAME}")
+                ],[
+                    InlineKeyboardButton(
+                        "👥 Official Group", url=f"https://t.me/{GROUP_SUPPORT}"
+                    ),
+                    InlineKeyboardButton(
+                        "📣 Official Channel", url=f"https://t.me/{UPDATES_CHANNEL}")
+                ],[
+                    InlineKeyboardButton(
+                        "💬 Ask For Help", url="https://t.me/veezcenterbot"
                     )
                 ]
             ]
@@ -67,15 +73,15 @@ async def start(client: Client, message: Message):
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
     await message.reply_text(
-        f"""I'm online!\n<b>Up since:</b> `{uptime}`""",
+        f"""✅ bot is running\n<b>💠 uptime:</b> `{uptime}`""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "🛠 Repo", url="https://github.com/tofikdn/TDMusicBot"
+                        "✨ Group", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        "💬 Group", url="https://t.me/tedesupport"
+                        "📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
                     )
                 ]
             ]
@@ -87,29 +93,29 @@ async def start(client: Client, message: Message):
 async def help(client: Client, message: Message):
     await message.reply_text(
         f"""<b>Hi {message.from_user.first_name}!
-\n/play (judul lagu) - Untuk Memutar lagu yang Anda minta melalui YouTube
-/playlist - Untuk Menampilkan daftar putar Lagu sekarang
-/current - Untuk Menunjukkan  Lagu sekarang yang sedang diputar
-/song (judul lagu) - Untuk Mendownload lagu dari YouTube 
-/search (judul video) - Untuk Mencari Video di YouTube dengan detail
-/video (judul video) - Untuk Mendownload Video di YouTube dengan detail
+\n/play (song name) - To play the song you requested from youtube
+/playlist - To show the list of all music for streaming
+/current - To show the song in streaming
+/song (song name) - To download song from youtube
+/search (video name) - To search video from youtube detailed
+/video (video name) - To download video from youtube detailed
 \n**Admins Only:**
 /player - Open music player settings panel
-/pause - Untuk Menjeda pemutaran Lagu
-/resume - Untuk Melanjutkan pemutaran Lagu yang di pause
-/skip - Untuk Menskip pemutaran lagu ke Lagu berikutnya
-/end - Untuk Memberhentikan pemutaran Lagu
-/userbotjoin - Untuk Mengundang asisten ke obrolan Anda
-/reload - Untuk Merefresh admin list
+/pause - Pause the music streaming
+/resume - Resume the music was paused
+/skip - For skip to the next song
+/end - For stop music streaming
+/userbotjoin - To invite the assistant for join to your group
+/reload - For refresh the admin list
 </b>""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "Group", url="https://t.me/tedesupport"
+                        "✨ Group", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        "Tede", url="https://t.me/tdtapibot"
+                        "📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
                     )
                 ]
             ]
@@ -120,10 +126,10 @@ async def help(client: Client, message: Message):
 @Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
 async def ping_pong(client: Client, m: Message):
     start = time()
-    m_reply = await m.reply_text("Pinging...")
+    m_reply = await m.reply_text("pinging...")
     delta_ping = time() - start
     await m_reply.edit_text(
-        f"{emoji.PING_PONG} **PONG!!**\n"
+        f"{emoji.PING_PONG} **🏓 PONG!!**\n\n"
         f"`{delta_ping * 1000:.3f} ms`"
     )
 
@@ -136,6 +142,6 @@ async def get_uptime(client: Client, m: Message):
     uptime = await _human_time_duration(int(uptime_sec))
     await m.reply_text(
         f"{emoji.ROBOT}\n"
-        f"• **Uptime:** `{uptime}`\n"
-        f"• **Start Time:** `{START_TIME_ISO}`"
+        f"• **uptime:** `{uptime}`\n"
+        f"• **start time:** `{START_TIME_ISO}`"
     )
