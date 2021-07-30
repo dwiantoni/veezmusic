@@ -305,12 +305,12 @@ async def m_cb(b, cb):
             await cb.answer("music paused!")
 
     elif type_ == "cls":          
-        await cb.answer("Closed menu")
+        await cb.answer("closed menu")
         await cb.message.delete()       
 
     elif type_ == "menu":  
         stats = updated_stats(cb.message.chat, qeue)  
-        await cb.answer("Menu opened")
+        await cb.answer("menu opened")
         marr = InlineKeyboardMarkup(
             [
                 [
@@ -366,7 +366,7 @@ async def m_cb(b, cb):
 @Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
 async def play(_, message: Message):
     global que
-    lel = await message.reply("🔎 **Sedang Mencari Lagu**")
+    lel = await message.reply("🔎 **searching...**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
     try:
