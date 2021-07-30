@@ -58,6 +58,9 @@ async def start_(client: Client, message: Message):
                         "📣 Official Channel", url=f"https://t.me/{UPDATES_CHANNEL}")
                 ],[
                     InlineKeyboardButton(
+                        "🌐 Wiki's Page", url="https://github.com/levina-lab/veezmusic/wiki/Veez-Music-Wiki's")
+                ],[
+                    InlineKeyboardButton(
                         "💬 Ask For Help", url="https://t.me/veezcenterbot"
                     )
                 ]
@@ -131,7 +134,7 @@ async def ping_pong(client: Client, m: Message):
     delta_ping = time() - start
     await m_reply.edit_text(
         f"{emoji.PING_PONG} **PONG!!**\n\n"
-        f"`{delta_ping * 1000:.3f} ms`"
+        f"⚡️ `{delta_ping * 1000:.3f} ms`"
     )
 
 
@@ -142,7 +145,7 @@ async def get_uptime(client: Client, m: Message):
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
     await m.reply_text(
-        f"{emoji.ROBOT}\n"
+        f"{emoji.ROBOT} bot status:\n"
         f"• **uptime:** `{uptime}`\n"
         f"• **start time:** `{START_TIME_ISO}`"
     )
