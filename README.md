@@ -1,6 +1,6 @@
 <h2 align="centre">🎶 Veez Music Bot</h2>
 
-### Bot musik yang dapat memutar musik di voice chat group anda.
+### Music bot for playing music on telegram voice chat group.
 
 <p align="center">
   <img src="https://telegra.ph/file/8bf3d62837cb59c3f8e7f.png">
