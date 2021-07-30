@@ -35,9 +35,9 @@
             "value": "https://telegra.ph/file/d91623e9cefcef8fb3aa8.png"
         },
         "OWNER_NAME": {
-            "description": "isi dengan username kamu",
+            "description": "isi dengan username kamu tanpa simbol @",
             "required": false,
-            "value": "@dlwrml"
+            "value": "dlwrml"
         },
         "API_ID": {
             "description": "App ID dari my.telegram.org/apps",
