@@ -40,11 +40,11 @@
             "value": "dlwrml"
         },
         "API_ID": {
-            "description": "App ID dari my.telegram.org/apps",
+            "description": "isi dengan App ID dari my.telegram.org/apps",
             "required": true
         },
         "API_HASH": {
-            "description": "App hash dari my.telegram.org/apps",
+            "description": "isi dengan Api hash dari my.telegram.org/apps",
             "required": true
         },
         "SUDO_USERS": {
@@ -55,6 +55,11 @@
             "description": "max durasi untuk video yang diunduh (dalam menit).",
             "required": true,
             "value": "15"
+        },
+        "PMPERMIT": {
+            "description": "pm-permit untuk assistant.",
+            "required": false,
+            "value": "ENABLE"
         },
         "UPDATES_CHANNEL": {
             "description": "isi dengan username channel kamu, jika tidak punya lewati saja",
