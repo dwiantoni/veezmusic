@@ -493,7 +493,7 @@ async def play(_, message: Message):
             if not path.isfile(path.join("downloads", file_name))
             else file_name
         )
-        elif urls:
+    elif urls:
         query = toxt
         await lel.edit("🎵 **connecting...**")
         ydl_opts = {"format": "bestaudio[ext=m4a]"}
