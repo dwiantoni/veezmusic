@@ -579,38 +579,38 @@ async def play(_, message: Message):
             requested_by = message.from_user.first_name
             await generate_cover(requested_by, title, views, duration, thumbnail)
             file_path = await converter.convert(youtube.download(url))
-                    
-                if message.chat.id in callsmusic.pytgcalls.active_calls:
-                    position = await queues.put(message.chat.id, file=file_path)
-                    qeue = que.get(message.chat.id)
-                    s_name = title
-                    r_by = message.from_user
-                    loc = file_path
-                    appendable = [s_name, r_by, loc]
-                    qeue.append(appendable)
-                    await message.reply_photo(
-                        photo = "final.png",
-                        caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Antrian ke {position}`\n" \
-                        + f"🔮 **Permintaan** {message.from_user.mention}",
-                        reply_markup = keyboard
-                    )
-                    os.remove("final.png")
-                    return await lel.delete()
-                else:
-                    chat_id = message.chat.id
-                    que[chat_id] = []
-                    qeue = que.get(message.chat.id)
-                    s_name = title            
-                    r_by = message.from_user
-                    loc = file_path
-                    appendable = [s_name, r_by, loc]      
-                    qeue.append(appendable)
-                    callsmusic.pytgcalls.join_group_call(message.chat.id, file_path)
-                    await message.reply_photo(
-                        photo = "final.png",
-                        caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Sedang Memutar`\n" \
-                        + f"🔮 **Permintaan:** {message.from_user.mention}",
-                        reply_markup = keyboard
-                    )
-                    os.remove("final.png")
-                    return await lel.delete()
+            
+            if message.chat.id in callsmusic.pytgcalls.active_calls:
+                position = await queues.put(message.chat.id, file=file_path)
+                qeue = que.get(message.chat.id)
+                s_name = title
+                r_by = message.from_user
+                loc = file_path
+                appendable = [s_name, r_by, loc]
+                qeue.append(appendable)
+                await message.reply_photo(
+                    photo = "final.png",
+                    caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Antrian ke {position}`\n" \
+                    + f"🔮 **Permintaan** {message.from_user.mention}",
+                    reply_markup = keyboard
+                )
+                os.remove("final.png")
+                return await lel.delete()
+            else:
+                chat_id = message.chat.id
+                que[chat_id] = []
+                qeue = que.get(message.chat.id)
+                s_name = title            
+                r_by = message.from_user
+                loc = file_path
+                appendable = [s_name, r_by, loc]      
+                qeue.append(appendable)
+                callsmusic.pytgcalls.join_group_call(message.chat.id, file_path)
+                await message.reply_photo(
+                    photo = "final.png",
+                    caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Sedang Memutar`\n" \
+                    + f"🔮 **Permintaan:** {message.from_user.mention}",
+                    reply_markup = keyboard
+                )
+                os.remove("final.png")
+                return await lel.delete()
