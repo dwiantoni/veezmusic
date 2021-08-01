@@ -560,7 +560,7 @@ async def play(_, message: Message):
                     if (dur / 60) > DURATION_LIMIT:
                         await lel.edit(f"❌ **Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!**")
                         return
-                    except:
+            except:
                         pass
                     durl = url
                     durl = durl.replace("youtube","youtubepp")
