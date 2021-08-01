@@ -530,24 +530,24 @@ async def play(_, message: Message):
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
         file_path = await convert(youtube.download(url))
- else:
-    query = ""
-    for i in message.command[1:]:
-        query += " " + str(i)
-    print(query)
-    await lel.edit("🔄 **processing...**")
-    ydl_opts = {"format": "bestaudio[ext=m4a]"}
-    try:
-        results = YoutubeSearch(query, max_results=1).to_dict()
-        url = f"https://www.youtube.com{results[0]['url_suffix']}"
-        title = results[0]["title"][:40]       
-        thumbnail = results[0]["thumbnails"][0]
-        thumb_name = f"thumb{title}.jpg"
-        thumb = requests.get(thumbnail, allow_redirects=True)
-        open(thumb_name, "wb").write(thumb.content)
-        duration = results[0]["duration"]
-        url_suffix = results[0]["url_suffix"]
-        views = results[0]["views"]
+    else:
+        query = ""
+        for i in message.command[1:]:
+            query += " " + str(i)
+            print(query)
+            await lel.edit("🔄 **processing...**")
+            ydl_opts = {"format": "bestaudio[ext=m4a]"}
+            try:
+                results = YoutubeSearch(query, max_results=1).to_dict()
+                url = f"https://www.youtube.com{results[0]['url_suffix']}"
+                title = results[0]["title"][:40]       
+                thumbnail = results[0]["thumbnails"][0]
+                thumb_name = f"thumb{title}.jpg"
+                thumb = requests.get(thumbnail, allow_redirects=True)
+                open(thumb_name, "wb").write(thumb.content)
+                duration = results[0]["duration"]
+                url_suffix = results[0]["url_suffix"]
+                views = results[0]["views"]
 
     except Exception as e:
         await lel.edit("**❌ song not found.** please give a valid song name.")
