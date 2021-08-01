@@ -548,70 +548,70 @@ async def play(_, message: Message):
                 duration = results[0]["duration"]
                 url_suffix = results[0]["url_suffix"]
                 views = results[0]["views"]
-
-                except Exception as e:
-                    await lel.edit("**❌ song not found.** please give a valid song name.")
-                    print(str(e))
-                    return
-                try:    
-                    secmul, dur, dur_arr = 1, 0, duration.split(":")
-                    for i in range(len(dur_arr)-1, -1, -1):
-                        dur += (int(dur_arr[i]) * secmul)
-                        secmul *= 60
-                        if (dur / 60) > DURATION_LIMIT:
-                            await lel.edit(f"❌ **Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!**")
-                            return
-                        except:
-                            pass
-                        durl = url
-                        durl = durl.replace("youtube","youtubepp")
-                        keyboard = InlineKeyboardMarkup(
-                            [   
-                                [
-                                    InlineKeyboardButton("📖 PlayList", callback_data="playlist"),
-                                    InlineKeyboardButton("⏯ Menu", callback_data="menu")
-                                ],                     
-                                [
-                                    InlineKeyboardButton("📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                                    InlineKeyboardButton("🗑 Close", callback_data="cls")
-                                ]                             
-                            ]
+                
+            except Exception as e:
+                await lel.edit("**❌ song not found.** please give a valid song name.")
+                print(str(e))
+                return
+            try:    
+                secmul, dur, dur_arr = 1, 0, duration.split(":")
+                for i in range(len(dur_arr)-1, -1, -1):
+                    dur += (int(dur_arr[i]) * secmul)
+                    secmul *= 60
+                    if (dur / 60) > DURATION_LIMIT:
+                        await lel.edit(f"❌ **Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!**")
+                        return
+                    except:
+                        pass
+                    durl = url
+                    durl = durl.replace("youtube","youtubepp")
+                    keyboard = InlineKeyboardMarkup(
+                        [   
+                            [
+                                InlineKeyboardButton("📖 PlayList", callback_data="playlist"),
+                                InlineKeyboardButton("⏯ Menu", callback_data="menu")
+                            ],                     
+                            [
+                                InlineKeyboardButton("📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"),
+                                InlineKeyboardButton("🗑 Close", callback_data="cls")
+                            ]                             
+                        ]
+                    )
+                    requested_by = message.from_user.first_name
+                    await generate_cover(requested_by, title, views, duration, thumbnail)  
+                    file_path = await converter.convert(youtube.download(url))
+                    
+                    if message.chat.id in callsmusic.pytgcalls.active_calls:
+                        position = await queues.put(message.chat.id, file=file_path)
+                        qeue = que.get(message.chat.id)
+                        s_name = title
+                        r_by = message.from_user
+                        loc = file_path
+                        appendable = [s_name, r_by, loc]
+                        qeue.append(appendable)
+                        await message.reply_photo(
+                            photo = "final.png",
+                            caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Antrian ke {position}`\n" \
+                            + f"🔮 **Permintaan** {message.from_user.mention}",
+                            reply_markup = keyboard
                         )
-                        requested_by = message.from_user.first_name
-                        await generate_cover(requested_by, title, views, duration, thumbnail)  
-                        file_path = await converter.convert(youtube.download(url))
-                        
-                        if message.chat.id in callsmusic.pytgcalls.active_calls:
-                            position = await queues.put(message.chat.id, file=file_path)
-                            qeue = que.get(message.chat.id)
-                            s_name = title
-                            r_by = message.from_user
-                            loc = file_path
-                            appendable = [s_name, r_by, loc]
-                            qeue.append(appendable)
-                            await message.reply_photo(
-                                photo = "final.png",
-                                caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Antrian ke {position}`\n" \
-                                + f"🔮 **Permintaan** {message.from_user.mention}",
-                                reply_markup = keyboard
-                            )
-                            os.remove("final.png")
-                            return await lel.delete()
-                        else:
-                            chat_id = message.chat.id
-                            que[chat_id] = []
-                            qeue = que.get(message.chat.id)
-                            s_name = title            
-                            r_by = message.from_user
-                            loc = file_path
-                            appendable = [s_name, r_by, loc]      
-                            qeue.append(appendable)
-                            callsmusic.pytgcalls.join_group_call(message.chat.id, file_path)
-                            await message.reply_photo(
-                                photo = "final.png",
-                                caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Sedang Memutar`\n" \
-                                + f"🔮 **Permintaan:** {message.from_user.mention}",
-                                reply_markup = keyboard
-                            )
-                            os.remove("final.png")
-                            return await lel.delete()
+                        os.remove("final.png")
+                        return await lel.delete()
+                    else:
+                        chat_id = message.chat.id
+                        que[chat_id] = []
+                        qeue = que.get(message.chat.id)
+                        s_name = title            
+                        r_by = message.from_user
+                        loc = file_path
+                        appendable = [s_name, r_by, loc]      
+                        qeue.append(appendable)
+                        callsmusic.pytgcalls.join_group_call(message.chat.id, file_path)
+                        await message.reply_photo(
+                            photo = "final.png",
+                            caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** `{duration}`\n💡 **Status:** `Sedang Memutar`\n" \
+                            + f"🔮 **Permintaan:** {message.from_user.mention}",
+                            reply_markup = keyboard
+                        )
+                        os.remove("final.png")
+                        return await lel.delete()
