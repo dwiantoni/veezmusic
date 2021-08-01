@@ -453,7 +453,24 @@ async def play(_, message: Message):
         await lel.edit(
             f"<i>{user.first_name} was banned from this group, ask admin to unban @{user.username} manually, and try to play song again.</i>"
         )
-        return     
+        return
+    text_links=None
+    await lel.edit("🔄 **finding song...**")
+    if message.reply_to_message:
+        entities = []
+        toxt = message.reply_to_message.text or message.reply_to_message.caption
+        if message.reply_to_message.entities:
+            entities = message.reply_to_message.entities + entities
+        elif message.reply_to_message.caption_entities:
+            entities = message.reply_to_message.entities + entities
+        urls = [entity for entity in entities if entity.type == 'url']
+        text_links = [
+            entity for entity in entities if entity.type == 'text_link'
+        ]
+    else:
+        urls=None
+    if text_links:
+        urls = True
     sender_id = message.from_user.id
     sender_name = message.from_user.first_name
     sender_id = message.from_user.id
