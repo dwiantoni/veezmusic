@@ -20,6 +20,7 @@ GROUP_SUPPORT = getenv("GROUP_SUPPORT", "gcsupportbots")
 UPDATES_CHANNEL = getenv("UPDATES_CHANNEL", "levinachannel")
 OWNER_NAME = getenv("OWNER_NAME", "dlwrml") # isi dengan username kamu tanpa simbol @
 DEV_NAME = getenv("DEV_NAME", "dlwrml")
+PMPERMIT = getenv("PMPERMIT", None)
 
 DURATION_LIMIT = int(getenv("DURATION_LIMIT", "60"))
 
