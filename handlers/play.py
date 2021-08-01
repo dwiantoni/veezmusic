@@ -188,7 +188,50 @@ async def settings(client, message):
         else:
             await message.reply(stats, reply_markup=r_ply("play"))
     else:
-        await message.reply("**turn on the voice chat first!**")
+        await message.reply("**please turn on the voice chat first.**")
+
+
+@Client.on_message(
+    filters.command("musicplayer") & ~filters.edited & ~filters.bot & ~filters.private
+)
+@authorized_users_only
+async def hfmm(_, message):
+    global DISABLED_GROUPS
+    try:
+        user_id = message.from_user.id
+    except:
+        return
+    if len(message.command) != 2:
+        await message.reply_text(
+            "**i'm only know** `/musicplayer on` **and** `/musicplayer off`"
+        )
+        return
+    status = message.text.split(None, 1)[1]
+    message.chat.id
+    if status == "ON" or status == "on" or status == "On":
+        lel = await message.reply("`processing...`")
+        if not message.chat.id in DISABLED_GROUPS:
+            await lel.edit("**music player already activated.**")
+            return
+        DISABLED_GROUPS.remove(message.chat.id)
+        await lel.edit(
+            f"✅ **music player has been activated in this chat.** {message.chat.id}"
+        )
+
+    elif status == "OFF" or status == "off" or status == "Off":
+        lel = await message.reply("`processing...`")
+        
+        if message.chat.id in DISABLED_GROUPS:
+            await lel.edit("**music player already deactivated.**")
+            return
+        DISABLED_GROUPS.append(message.chat.id)
+        await lel.edit(
+            f"✅ **music player has been deactivated in this chat.** {message.chat.id}"
+        )
+    else:
+        await message.reply_text(
+            "**i'm only know** `/musicplayer on` **and** `/musicplayer off`"
+        )
 
 
 @Client.on_callback_query(filters.regex(pattern=r"^(playlist)$"))
@@ -417,6 +460,38 @@ async def play(_, message: Message):
     sender_name = message.from_user.first_name
     user_name = message.from_user.first_name
     rpk = "["+user_name+"](tg://user?id="+str(user_id)+")"
+    audio = (
+        (message.reply_to_message.audio or message.reply_to_message.voice)
+        if message.reply_to_message
+        else None
+    )
+    if audio:
+        if round(audio.duration / 60) > DURATION_LIMIT:
+            raise DurationLimitError(
+                f"❌ **Lagu dengan durasi lebih dari** `{DURATION_LIMIT}` **menit tidak boleh diputar!**"
+            )
+        keyboard = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("✨ Groups", url=f"https://t.me/{GROUP_SUPPORT}"),
+                    InlineKeyboardButton("📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"),
+                ],
+                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+            ]
+        )
+        file_name = get_file_name(audio)
+        title = file_name
+        thumb_name = "https://telegra.ph/file/fa2cdb8a14a26950da711.png"
+        thumbnail = thumb_name
+        duration = round(audio.duration / 60)
+        views = "Locally added"
+        requested_by = message.from_user.first_name
+        await generate_cover(requested_by, title, views, duration, thumbnail)
+        file_path = await convert(
+            (await message.reply_to_message.download(file_name))
+            if not path.isfile(path.join("downloads", file_name))
+            else file_name
+        )
 
     query = ""
     for i in message.command[1:]:
