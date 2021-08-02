@@ -40,11 +40,14 @@ def cb_admin_check(func: Callable) -> Callable:
         else:
             await cb.answer("you not allowed to do this!", show_alert=True)
             return
+        
     return decorator                                                                       
                                           
                                                                                     
 def transcode(filename):
-    ffmpeg.input(filename).output("input.raw", format="s16le", acodec="pcm_s16le", ac=2, ar="48k").overwrite_output().run() 
+    ffmpeg.input(filename).output(
+        "input.raw", format="s16le", acodec="pcm_s16le", ac=2, ar="48k"
+    ).overwrite_output().run() 
     os.remove(filename)
 
 # Convert seconds to mm:ss
@@ -693,9 +696,9 @@ async def lol_cb(b, cb):
     await cb.message.edit("🔁 **processing...**")
     x=int(x)
     try:
-        useer_name = cb.message.reply_to_message.from_user.first_name
+        useer_name = message.reply_to_message.from_user.first_name
     except:
-        useer_name = cb.message.from_user.first_name
+        useer_name = message.from_user.first_name
     
     results = YoutubeSearch(query, max_results=5).to_dict()
     resultss=results[x]["url_suffix"]
@@ -708,7 +711,7 @@ async def lol_cb(b, cb):
     try:    
         duuration= round(duration / 60)
         if duuration > DURATION_LIMIT:
-            await cb.message.edit(f"❗ lagu dengan durasi lebih dari {DURATION_LIMIT} menit tidak dapat diputar.")
+            await message.edit(f"❗ lagu dengan durasi lebih dari {DURATION_LIMIT} menit tidak dapat diputar.")
             return
     except:
         pass
@@ -736,18 +739,16 @@ async def lol_cb(b, cb):
         position = await queues.put(chat_id, file=file_path)
         qeue = que.get(chat_id)
         s_name = title
-        try:
-            r_by = cb.message.reply_to_message.from_user
-        except:
-            r_by = cb.message.from_user
+        r_by = message.reply_to_message.from_user
+        r_by = message.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
         qeue.append(appendable)
-        await cb.message.delete()
-        await b.send_photo(chat_id,
+        await message.delete()
+        await send_photo(chat_id,
             photo="final.png",
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n" \
-                    + f"🔮 **Permintaan:** {message.from_user.mention}",
+                    + f"🔮 **Permintaan:** {r_by.mention}",
                    reply_markup=keyboard,
         )
         os.remove("final.png")
@@ -756,20 +757,18 @@ async def lol_cb(b, cb):
         que[chat_id] = []
         qeue = que.get(chat_id)
         s_name = title
-        try:
-            r_by = cb.message.reply_to_message.from_user
-        except:
-            r_by = cb.message.from_user
+        r_by = message.reply_to_message.from_user
+        r_by = message.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
         qeue.append(appendable)
 
         callsmusic.pytgcalls.join_group_call(chat_id, file_path)
-        await cb.message.delete()
-        await b.send_photo(chat_id,
+        await message.delete()
+        await send_photo(chat_id,
             photo="final.png",
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n" \
-                    + f"🔮 **Permintaan:** {message.from_user.mention}",
+                    + f"🔮 **Permintaan:** {r_by.mention}",
                     reply_markup=keyboard,
         )
         os.remove("final.png")
