@@ -724,8 +724,8 @@ async def lol_cb(b, cb):
     keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📌 Groups", url="https://t.me/GeezSupportGroup"),
-                    InlineKeyboardButton(text="🗑 Close", callback_data="cls")
+                    InlineKeyboardButton("🎛 menu", callback_data="menu"),
+                    InlineKeyboardButton(text="❌ urungkan", callback_data="cls")
                 ],
             ]
        )
@@ -747,7 +747,7 @@ async def lol_cb(b, cb):
         await b.send_photo(chat_id,
             photo="final.png",
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n" \
-                    + f"🔮 **Permintaan:** {r_by.mention}",
+                    + f"🔮 **Permintaan:** {message.from_user.mention}",
                    reply_markup=keyboard,
         )
         os.remove("final.png")
@@ -769,7 +769,7 @@ async def lol_cb(b, cb):
         await b.send_photo(chat_id,
             photo="final.png",
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n" \
-                    + f"🔮 **Permintaan:** {r_by.mention}",
+                    + f"🔮 **Permintaan:** {message.from_user.mention}",
                     reply_markup=keyboard,
         )
         os.remove("final.png")
