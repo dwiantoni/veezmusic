@@ -634,7 +634,7 @@ async def play(_, message: Message):
                     InlineKeyboardButton(text="🗑 Close", callback_data="cls")
                 ],
             ]
-        )
+            )
             requested_by = message.from_user.first_name
             await generate_cover(requested_by, title, views, duration, thumbnail)
             file_path = await convert(youtube.download(url))   
@@ -745,7 +745,7 @@ async def lol_cb(b, cb):
         appendable = [s_name, r_by, loc]
         qeue.append(appendable)
         await cb.message.delete()
-        await b.reply_photo(chat_id,
+        await b.message.reply_photo(chat_id,
             photo="final.png",
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Antrian Ke `{position}`\n" \
                     + f"🔮 **Permintaan:** {r_by.mention}",
@@ -765,7 +765,7 @@ async def lol_cb(b, cb):
 
         callsmusic.pytgcalls.join_group_call(chat_id, file_path)
         await cb.message.delete()
-        await b.reply_photo(chat_id,
+        await b.message.reply_photo(chat_id,
             photo="final.png",
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n" \
                     + f"🔮 **Permintaan:** {r_by.mention}",
