@@ -672,9 +672,17 @@ async def play(_, message: Message):
             caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n" \
                     + f"🔮 **Permintaan:** {message.from_user.mention}",
                    reply_markup=keyboard)
-
-    os.remove("final.png")
-    return await lel.delete()
+        
+        m = await client.send_photo(
+            chat_id=message_.chat.id,
+            reply_markup=keyboard,
+            photo="final.png",
+            caption = f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n💡 **Status:** Sedang Memutar\n" \
+                    + f"🔮 **Permintaan:** {message.from_user.mention}",
+                   reply_markup=keyboard,
+        )
+        os.remove("final.png")
+        return await lel.delete()
 
 @Client.on_callback_query(filters.regex(pattern=r"plll"))
 async def lol_cb(b, cb):
