@@ -1,4 +1,5 @@
 import os
+import json
 import ffmpeg
 import aiohttp
 import aiofiles
@@ -20,7 +21,7 @@ from config import que, DURATION_LIMIT, BOT_USERNAME, UPDATES_CHANNEL, GROUP_SUP
 from helpers.filters import command, other_filters
 from helpers.decorators import authorized_users_only
 from helpers.gets import get_file_name
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, Voice
 from cache.admins import admins as a
 from PIL import Image, ImageFont, ImageDraw
 chat_id = None
@@ -411,6 +412,9 @@ async def m_cb(b, cb):
 @Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
 async def play(_, message: Message):
     global que
+    global useer
+    if message.chat.id in DISABLED_GROUPS:
+        return
     lel = await message.reply("🔎 **searching...**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
@@ -447,7 +451,6 @@ async def play(_, message: Message):
                                   f"<b>🔴 Flood Wait Error 🔴 \n{user.first_name} tidak dapat bergabung dengan group Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam group."
                         f"\n\nAtau tambahkan @{user.username} Bot secara manual ke Group Anda dan coba lagi.</b>",
                               )
-                              pass
     try:
         chatdetails = await USER.get_chat(chid)
     except:
@@ -503,7 +506,7 @@ async def play(_, message: Message):
         thumb_name = "https://telegra.ph/file/fa2cdb8a14a26950da711.png"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
-        views = "Locally added"
+        views = "locally added"
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
         file_path = await convert(
@@ -576,7 +579,7 @@ async def play(_, message: Message):
                     dur += (int(dur_arr[i]) * secmul)
                     secmul *= 60
                     if (dur / 60) > DURATION_LIMIT:
-                        await lel.edit(f"❌ **Lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!**")
+                        await lel.edit(f"❌ **lagu dengan durasi lebih dari `{DURATION_LIMIT}` menit tidak dapat diputar!**")
                         return
             except:
                 pass
