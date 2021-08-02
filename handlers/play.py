@@ -679,10 +679,11 @@ async def play(_, message: Message):
 @Client.on_callback_query(filters.regex(pattern=r"plll"))
 async def lol_cb(b, cb):
     global que
-
+    qeue = que.get(cb.message.chat.id)
     cbd = cb.data.strip()
     chat_id = cb.message.chat.id
     typed_=cbd.split(None, 1)[1]
+    m_chat = cb.message.chat
     #useer_id = cb.message.reply_to_message.from_user.id
     try:
         x,query,useer_id = typed_.split("|")      
