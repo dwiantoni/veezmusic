@@ -3,7 +3,7 @@
 ### Music bot for playing music on telegram voice chat group.
 
 <p align="center">
-  <img src="https://telegra.ph/file/8bf3d62837cb59c3f8e7f.png">
+  <img src="https://telegra.ph/file/3881ea4e07d8378e9d2ac.jpg">
 </p>
 
 <h3>Requirements 📝</h3>
@@ -43,6 +43,7 @@ the easy way to host this bot, deploy to heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/levina-lab/veezmusic)
 
 ### Credits 💖
+- [mizu]
 - [Levina](https://github.com/levina-lab): Dev
 - [Laky](https://github.com/Laky-64) & [Andrew](https://github.com/AndrewLaneX): PyTgCalls
 - [Original Repo](https://github.com/suprojects/CallsMusic)
