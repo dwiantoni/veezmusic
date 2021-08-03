@@ -273,10 +273,19 @@ async def p_cb(b, cb):
         await cb.message.edit(msg)      
 
 
-@Client.on_callback_query(filters.regex(pattern=r"^(play|pause|skip|leave|puse|resume|menu|cls)$"))
+@Client.on_callback_query(
+    filters.regex(pattern=r"^(play|pause|skip|leave|puse|resume|menu|cls)$")
+)
 @cb_admin_check
 async def m_cb(b, cb):
-    global que    
+    global que   
+    if (
+        cb.message.chat.title.startswith("Channel Music: ")
+        and chat.title[14:].isnumeric()
+    ):
+        chet_id = int(chat.title[13:])
+    else:
+        chet_id = cb.message.chat.id
     qeue = que.get(cb.message.chat.id)
     type_ = cb.matches[0].group(1)
     chat_id = cb.message.chat.id
