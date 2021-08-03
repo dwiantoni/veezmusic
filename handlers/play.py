@@ -286,34 +286,34 @@ async def m_cb(b, cb):
         chet_id = int(chat.title[13:])
     else:
         chet_id = cb.message.chat.id
-    qeue = que.get(cb.message.chat.id)
+    qeue = que.get(chet.id)
     type_ = cb.matches[0].group(1)
-    chat_id = cb.message.chat.id
+    cb.message.chat.id
     m_chat = cb.message.chat
 
     the_data = cb.message.reply_markup.inline_keyboard[1][0].callback_data
     if type_ == "pause":
         if (
-            chat_id not in callsmusic.pytgcalls.active_calls
+            chet_id not in callsmusic.pytgcalls.active_calls
                 ) or (
-                    callsmusic.pytgcalls.active_calls[chat_id] == "paused"
+                    callsmusic.pytgcalls.active_calls[chet_id] == "paused"
                 ):
             await cb.answer("assistant is not connected to voice chat!", show_alert=True)
         else:
-            callsmusic.pytgcalls.pause_stream(chat_id)
+            callsmusic.pytgcalls.pause_stream(chet_id)
             
             await cb.answer("music paused!")
             await cb.message.edit(updated_stats(m_chat, qeue), reply_markup=r_ply("play"))
                 
     elif type_ == "play":       
         if (
-            chat_id not in callsmusic.pytgcalls.active_calls
+            chet_id not in callsmusic.pytgcalls.active_calls
             ) or (
-                callsmusic.pytgcalls.active_calls[chat_id] == "playing"
+                callsmusic.pytgcalls.active_calls[chet_id] == "playing"
             ):
                 await cb.answer("assistant is not connected to voice chat!", show_alert=True)
         else:
-            callsmusic.pytgcalls.resume_stream(chat_id)
+            callsmusic.pytgcalls.resume_stream(chet_id)
             await cb.answer("music resumed!")
             await cb.message.edit(updated_stats(m_chat, qeue), reply_markup=r_ply("pause"))
 
@@ -342,24 +342,24 @@ async def m_cb(b, cb):
                       
     elif type_ == "resume":     
         if (
-            chat_id not in callsmusic.pytgcalls.active_calls
+            chet_id not in callsmusic.pytgcalls.active_calls
             ) or (
-                callsmusic.pytgcalls.active_calls[chat_id] == "playing"
+                callsmusic.pytgcalls.active_calls[chet_id] == "playing"
             ):
                 await cb.answer("voice chat is not connected or already playing", show_alert=True)
         else:
-            callsmusic.pytgcalls.resume_stream(chat_id)
+            callsmusic.pytgcalls.resume_stream(chet_id)
             await cb.answer("music resumed!")
      
     elif type_ == "puse":         
         if (
-            chat_id not in callsmusic.pytgcalls.active_calls
+            chet_id not in callsmusic.pytgcalls.active_calls
                 ) or (
-                    callsmusic.pytgcalls.active_calls[chat_id] == "paused"
+                    callsmusic.pytgcalls.active_calls[chet_id] == "paused"
                 ):
             await cb.answer("voice chat is not connected or already paused", show_alert=True)
         else:
-            callsmusic.pytgcalls.pause_stream(chat_id)
+            callsmusic.pytgcalls.pause_stream(chet_id)
             
             await cb.answer("music paused!")
 
@@ -396,16 +396,16 @@ async def m_cb(b, cb):
         if chat_id not in callsmusic.pytgcalls.active_calls:
             await cb.answer("assistant is not connected to voice chat!", show_alert=True)
         else:
-            callsmusic.queues.task_done(chat_id)
+            callsmusic.queues.task_done(chet_id)
 
-            if callsmusic.queues.is_empty(chat_id):
-                callsmusic.pytgcalls.leave_group_call(chat_id)
+            if callsmusic.queues.is_empty(chet_id):
+                callsmusic.pytgcalls.leave_group_call(chet_id)
                 
-                await cb.message.edit("• Tidak Ada Lagi Daftar Putar.\n• Meninggalkan VCG!")
+                await cb.message.edit("• no more playlist.\n• leaving voice chat!")
             else:
                 callsmusic.pytgcalls.change_stream(
                     chat_id,
-                    callsmusic.queues.get(chat_id)["file"]
+                    callsmusic.queues.get(chet_id)["file"]
                 )
                 await cb.answer("skipped")
                 await cb.message.edit(f"• Skipped **{skip[0]}**\n• Now Playing **{qeue[0][0]}**")
@@ -413,11 +413,11 @@ async def m_cb(b, cb):
     elif type_ == "leave":
         if chat_id in callsmusic.pytgcalls.active_calls:
             try:
-                callsmusic.queues.clear(chat_id)
+                callsmusic.queues.clear(chet_id)
             except QueueEmpty:
                 pass
 
-            callsmusic.pytgcalls.leave_group_call(chat_id)
+            callsmusic.pytgcalls.leave_group_call(chet_id)
             await cb.message.edit("⏹ **music stopped!**")
         else:
             await cb.answer("assistant is not connected to voice chat!", show_alert=True)
