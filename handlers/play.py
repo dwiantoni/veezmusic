@@ -17,7 +17,7 @@ from pyrogram.errors import UserAlreadyParticipant
 from downloaders import youtube
 
 from converter.converter import convert
-from config import que, DURATION_LIMIT, BOT_USERNAME, UPDATES_CHANNEL, GROUP_SUPPORT
+from config import que, DURATION_LIMIT, BOT_USERNAME, UPDATES_CHANNEL, GROUP_SUPPORT, ASSISTANT_NAME
 from helpers.filters import command, other_filters
 from helpers.decorators import authorized_users_only
 from helpers.gets import get_file_name
@@ -739,7 +739,7 @@ async def lol_cb(b, cb):
                     InlineKeyboardButton(text="❌ urungkan", callback_data="cls")
                 ],
             ]
-       )
+    )
     requested_by = useer_name
     await generate_cover(requested_by, title, views, duration, thumbnail)
     file_path = await convert(youtube.download(url))  
