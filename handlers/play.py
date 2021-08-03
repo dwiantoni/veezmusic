@@ -286,7 +286,7 @@ async def m_cb(b, cb):
         chet_id = int(chat.title[13:])
     else:
         chet_id = cb.message.chat.id
-    qeue = que.get(chet.id)
+    qeue = que.get(chet_id)
     type_ = cb.matches[0].group(1)
     cb.message.chat.id
     m_chat = cb.message.chat
