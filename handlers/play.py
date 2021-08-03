@@ -291,7 +291,7 @@ async def m_cb(b, cb):
     cb.message.chat.id
     m_chat = cb.message.chat
 
-    the_data = cb.message.reply_markup.inline_keyboard[1][0].callback_data
+    the_data = cb.message.reply_markup.inline_keyboard[1][1].callback_data
     if type_ == "pause":
         if (
             chet_id not in callsmusic.pytgcalls.active_calls
